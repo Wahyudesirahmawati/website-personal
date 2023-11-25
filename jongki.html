@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jongkong Jongki</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      header {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 1em 0;
+      }
+
+      nav {
+        background-color: #555;
+        padding: 0.5em;
+      }
+
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        padding: 1em;
+        margin: 0 0.5em;
+        border-radius: 5px;
+      }
+
+      section {
+        padding: 2em;
+      }
+
+      .menu-item {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 2em;
+        padding: 1em;
+        background-color: #fff;
+      }
+
+      .menu-item img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin-bottom: 1em;
+      }
+
+      .contact-info {
+        margin-top: 2em;
+      }
+
+      .social-media {
+        margin-top: 2em;
+      }
+
+      footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 1em 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Jongkong Jongki</h1>
+    </header>
+
+    <nav>
+      <a href="#">Beranda</a>
+      <a href="#">Menu</a>
+      <a href="https://wa.me/08877144183" target="_blank">Kontak</a>
+      <a href="#" onclick="showCart()">Keranjang Belanja</a>
+      <input type="text" id="searchInput" placeholder="Cari produk..." />
+      <button onclick="searchProduct()">Cari</button>
+    </nav>
+
+    <section>
+      <h2>Menu Makanan</h2>
+
+      <div class="menu-item">
+        <img src="jongkong_ireng (2).jpg" alt="Jongkong Jongki" />
+        <h3>Jongkong Jongki</h3>
+        <p>Harga: Rp 2.000</p>
+        <p>Review: Enak sekali!</p>
+        <!-- Tombol Pemesanan -->
+        <button onclick="pesanMenu('Jongkong Jongki', 2000)">Pesan</button>
+      </div>
+
+      <!-- Item Menu Lainnya -->
+
+      <div class="contact-info">
+        <h2>Info Kontak</h2>
+        <p>Email: wahyudesirahmawati@gmail.com</p>
+        <p>Whatsapp: 0887-7144-183</p>
+        <p>Alamat: Kec. Kedungadem Kab. Bojonegoro</p>
+      </div>
+
+      <div class="social-media">
+        <h2>Sosial Media</h2>
+        <p>Ikuti kami di:</p>
+        <a href="https://www.facebook.com/wahyu-desi-rahmawati" target="_blank"
+          >Facebook</a
+        >
+        <a href="https://www.instagram.com/jongkong.ireng/" target="_blank"
+          >Instagram</a
+        >
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2023 Wahyu Desi Rahmawati. Farmasi UNUGIRI.</p>
+    </footer>
+
+    <script>
+      // Fungsi untuk menangani pemesanan (contoh sederhana)
+      function pesanMenu(namaMenu, hargaMenu) {
+        alert(`Anda memesan ${namaMenu} dengan harga ${hargaMenu}!`);
+      }
+      // Fungsi untuk menambah produk ke keranjang
+      function addToCart(productName, price) {
+        // Implementasi logika tambah ke keranjang di sini
+        alert(
+          `Produk ${productName} ditambahkan ke keranjang dengan harga Rp ${price}`
+        );
+      }
+
+      // Fungsi untuk menampilkan keranjang
+      function showCart() {
+        var modal = document.getElementById("cartModal");
+        modal.style.display = "block";
+      }
+
+      // Fungsi untuk menyembunyikan keranjang
+      function hideCart() {
+        var modal = document.getElementById("cartModal");
+        modal.style.display = "none";
+      }
+
+      // Fungsi untuk melakukan pencarian produk
+      function searchProduct() {
+        var searchInput = document.getElementById("searchInput").value;
+        // Implementasi logika pencarian di sini
+        alert(`Melakukan pencarian untuk: ${searchInput}`);
+      }
+
+      // Variabel untuk menyimpan keranjang belanja
+      var cart = [];
+
+      // Fungsi untuk menambah produk ke keranjang
+      function addToCart(productName, price) {
+        // Tambahkan produk ke array keranjang
+        cart.push({ name: productName, price: price });
+
+        // Update tampilan jumlah barang di keranjang
+        updateCartCount();
+
+        // Implementasi logika tambah ke keranjang di sini
+        alert(
+          `Produk ${productName} ditambahkan ke keranjang dengan harga Rp ${price}`
+        );
+      }
+
+      // Fungsi untuk menampilkan keranjang
+      function showCart() {
+        var modal = document.getElementById("cartModal");
+        modal.style.display = "block";
+
+        // Tampilkan isi keranjang
+        displayCartItems();
+      }
+
+      // Fungsi untuk menyembunyikan keranjang
+      function hideCart() {
+        var modal = document.getElementById("cartModal");
+        modal.style.display = "none";
+      }
+
+      // Fungsi untuk menampilkan isi keranjang
+      function displayCartItems() {
+        var cartItemsList = document.getElementById("cartItems");
+        cartItemsList.innerHTML = ""; // Bersihkan isi sebelum menampilkan kembali
+
+        // Tampilkan setiap item di keranjang
+        cart.forEach(function (item) {
+          var listItem = document.createElement("li");
+          listItem.textContent = `${item.name} - Rp ${item.price}`;
+          cartItemsList.appendChild(listItem);
+        });
+
+        // Hitung total dan tampilkan
+        var cartTotalElement = document.getElementById("cartTotal");
+        var cartTotal = cart.reduce((total, item) => total + item.price, 0);
+        cartTotalElement.textContent = cartTotal;
+      }
+
+      // Fungsi untuk melakukan pencarian produk
+      function searchProduct() {
+        var searchInput = document.getElementById("searchInput").value;
+        // Implementasi logika pencarian di sini
+        alert(`Melakukan pencarian untuk: ${searchInput}`);
+      }
+
+      // Fungsi untuk mengupdate tampilan jumlah barang di keranjang
+      function updateCartCount() {
+        var cartCountElement = document.getElementById("cartCount");
+        cartCountElement.textContent = cart.length;
+      }
+    </script>
+  </body>
+</html>
